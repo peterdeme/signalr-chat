@@ -12,7 +12,6 @@ namespace SignalR
     {
         public void Configuration(IAppBuilder app)
         {
-            Logger.Log("starting app");
             app.MapSignalR();
             ChatUserStore.Initialize();                    
         }
