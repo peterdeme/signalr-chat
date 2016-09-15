@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using SignalR.Controllers;
 
 
 namespace SignalR.ChatUserModel
 {
 
-   public class ChatUser
+    public class ChatUser
     {
         public ChatUser(string username, bool isoccupied, string connectionid)
         {

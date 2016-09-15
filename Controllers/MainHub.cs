@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.SignalR;
+
 using SignalR.ChatUserModel;
 
 
 namespace SignalR.Controllers
 {
-   
+
     public class MainHub : Hub
     {
         public void Send(string name, string message)
