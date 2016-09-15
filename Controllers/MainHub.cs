@@ -64,7 +64,6 @@ namespace SignalR.Controllers
         {
             var disconnectedUser = ChatUserStore.GetCurrentUser(Context.ConnectionId);
             var disconnectedUsersPair = disconnectedUser.Pair;
-            Logger.Log("disconnected is " + disconnectedUser.ConnectionID + " does he have pair? " + (disconnectedUsersPair == null).ToString());
             if (disconnectedUsersPair != null)
             {
                 disconnectedUsersPair.Pair = null;                
