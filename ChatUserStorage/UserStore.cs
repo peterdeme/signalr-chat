@@ -9,14 +9,12 @@ namespace SignalR.ChatUserStorage
 
     public class ChatUser
     {
-        public ChatUser(string username, bool isoccupied, string connectionid)
+        public ChatUser(string username, string connectionid)
         {
-            this.UserName = username;
-            this.IsOccupied = isoccupied;
+            this.UserName = username;           
             this.ConnectionID = connectionid;
         }
-        public string UserName { get; set; }
-        public bool IsOccupied { get; set; }
+        public string UserName { get; set; }      
         public string ConnectionID { get; set;}
         public ChatUser Pair { get; set; }
     }
@@ -40,7 +38,7 @@ namespace SignalR.ChatUserStorage
         {
             if (!chatUserCache.Keys.Where(x => x == connectionId).Any())
             {
-                chatUserCache.TryAdd(connectionId, new ChatUser(GetRandomName(), false, connectionId));
+                chatUserCache.TryAdd(connectionId, new ChatUser(GetRandomName(),  connectionId));
             }
         }
 
@@ -51,7 +49,7 @@ namespace SignalR.ChatUserStorage
 
         public static ChatUser GetFreeUserAndPairWithCurrent(string connectionId)
         {          
-            var freeUser = chatUserCache.Values.First(x => x.Pair == null && x.ConnectionID != connectionId);
+            var freeUser = chatUserCache.Values.FirstOrDefault(x => x.Pair == null && x.ConnectionID != connectionId);           
             if (freeUser != null)
             {
                 var currentUser = GetCurrentUser(connectionId);               
@@ -75,7 +73,7 @@ namespace SignalR.ChatUserStorage
 
         public static ChatUser GetCurrentUser(string connectionid)
         {
-            return chatUserCache.Values.Where(x => x.ConnectionID == connectionid).FirstOrDefault();
+            return chatUserCache.Values.FirstOrDefault(x => x.ConnectionID == connectionid);
         }
 
         public static void RemoveFromCache(string connectionid)
