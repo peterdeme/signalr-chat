@@ -8,12 +8,6 @@ namespace SignalR.ChatHub
 {
     public class MainHub : Hub
     {
-        public void Send(string name, string message)
-        {
-            Clients.All.addToPage(name, message);            
-        }
-      
-
         public void SendMessage(string message)
         {           
            var currentuser = ChatUserStore.GetCurrentUser(Context.ConnectionId);
