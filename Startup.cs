@@ -2,7 +2,7 @@
 using Owin;
 
 using SignalR.Controllers;
-using SignalR.ChatUserModel;
+using SignalR.ChatUserStorage;
 
 [assembly: OwinStartup(typeof(SignalR.Startup))]
 

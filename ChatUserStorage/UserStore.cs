@@ -4,7 +4,7 @@ using System.Linq;
 using SignalR.Controllers;
 
 
-namespace SignalR.ChatUserModel
+namespace SignalR.ChatUserStorage
 {
 
     public class ChatUser
@@ -50,12 +50,11 @@ namespace SignalR.ChatUserModel
         }
 
         public static ChatUser GetFreeUserAndPairWithCurrent(string connectionId)
-        {
-            var freeUser = chatUserCache.Values.Where(x => x.Pair == null && x.ConnectionID != connectionId).First();
+        {          
+            var freeUser = chatUserCache.Values.First(x => x.Pair == null && x.ConnectionID != connectionId);
             if (freeUser != null)
             {
-                var currentUser = GetCurrentUser(connectionId);
-                Logger.Log("Paired current user: " + currentUser.ConnectionID + " with a free user:" + freeUser.ConnectionID);
+                var currentUser = GetCurrentUser(connectionId);               
                 currentUser.Pair = freeUser;
                 freeUser.Pair = currentUser;
                 return freeUser;
@@ -71,8 +70,7 @@ namespace SignalR.ChatUserModel
                 currentUser.UserName = username;
                 return true;
             }
-            return false;
-                
+            return false;                
         }
 
         public static ChatUser GetCurrentUser(string connectionid)
@@ -82,10 +80,8 @@ namespace SignalR.ChatUserModel
 
         public static void RemoveFromCache(string connectionid)
         {
-            ChatUser removedUser;
-           // chatUserCache.Remove
-            chatUserCache.TryRemove(connectionid, out removedUser);
-            removedUser = null; //dispose
+            ChatUser removedUser;         
+            chatUserCache.TryRemove(connectionid, out removedUser);          
         }
 
         private static string GetRandomName()
