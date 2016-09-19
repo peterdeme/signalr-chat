@@ -2,7 +2,17 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
+using SignalR.ChatUserStorage;
 
+namespace SignalR.ChatHub
+{
+    public class MainHub : Hub
+    {
+        public void Send(string name, string message)
+        {
+            Clients.All.addToPage(name, message);            
+        }
+      
 
         public void SendMessage(string message)
         {           
