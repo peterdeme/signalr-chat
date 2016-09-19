@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
-
-
         public void SendMessage(string message)
         {           
            var currentuser = ChatUserStore.GetCurrentUser(Context.ConnectionId);
